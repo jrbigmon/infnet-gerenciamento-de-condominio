@@ -37,3 +37,4 @@ apartaments ||--o{ residents : references
 		UUID condominium_id
 	}
 ```
+https://www.drawdb.app/editor?shareId=e669229754af60f8f9928c228a6dcebb
