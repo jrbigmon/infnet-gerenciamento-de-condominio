@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CondominiumController {
 
-    private CondominiumService condominiumService;
+    private final CondominiumService condominiumService;
+
+    public CondominiumController(CondominiumService condominiumService) {
+        this.condominiumService = condominiumService;
+    }
 
     @PostMapping("/condominiums")
     Condominium create(@RequestBody CreateCondominiumDto input) {
