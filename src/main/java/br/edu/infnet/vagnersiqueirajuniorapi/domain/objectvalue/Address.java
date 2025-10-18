@@ -9,10 +9,10 @@ public class Address {
     private String street;
     private String city;
     private String state;
-    private String zip;
+    private String zipcode;
     private String country;
 
     public boolean isValid() {
-        return !street.isEmpty() && !city.isEmpty() && !state.isEmpty() && !zip.isEmpty() && !country.isEmpty();
+        return !street.isEmpty() && !city.isEmpty() && !state.isEmpty() && !zipcode.isEmpty() && !country.isEmpty();
     }
 }

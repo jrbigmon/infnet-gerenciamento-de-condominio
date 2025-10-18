@@ -1,0 +1,22 @@
+package br.edu.infnet.vagnersiqueirajuniorapi.application.service;
+
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Condominium;
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.ConflictException;
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.CreateCondominiumUseCase;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CondominiumService {
+
+    private final CreateCondominiumUseCase createCondominiumUseCase;
+
+    public CondominiumService(CreateCondominiumUseCase createCondominiumUseCase) {
+        this.createCondominiumUseCase = createCondominiumUseCase;
+    }
+
+    public Condominium create(String name, String street, String city, String state, String zipcode, String country)
+            throws InvalidFieldException, ConflictException {
+        return createCondominiumUseCase.execute(name, street, city, state, zipcode, country);
+    }
+}
