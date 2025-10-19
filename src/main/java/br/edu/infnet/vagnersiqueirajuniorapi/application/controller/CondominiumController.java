@@ -20,12 +20,14 @@ public class CondominiumController {
 
     @PostMapping("/condominiums")
     public Condominium create(@RequestBody CreateCondominiumDto input) {
-        return condominiumService.create(input.name(), input.street(), input.city(), input.state(), input.zipcode(), input.country());
+        return condominiumService.create(
+                input.name(), input.street(), input.city(), input.state(), input.zipcode(), input.country());
     }
 
     @PutMapping("/condominiums/{id}")
-     public Condominium update(@PathVariable UUID id, @RequestBody UpdateCondominiumDto input)  {
-        return condominiumService.update(id, input.name(), input.street(), input.city(), input.state(), input.zipcode(), input.country());
+    public Condominium update(@PathVariable UUID id, @RequestBody UpdateCondominiumDto input) {
+        return condominiumService.update(
+                id, input.name(), input.street(), input.city(), input.state(), input.zipcode(), input.country());
     }
 
     @GetMapping("/condominiums")
@@ -34,7 +36,7 @@ public class CondominiumController {
     }
 
     @GetMapping("/condominiums/{id}")
-    public Condominium get(@PathVariable UUID id)  {
+    public Condominium get(@PathVariable UUID id) {
         return condominiumService.get(id);
     }
 }

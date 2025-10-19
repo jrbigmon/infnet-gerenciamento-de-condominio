@@ -20,7 +20,10 @@ public class CondominiumRepositoryImpl implements ICondominiumRepository {
 
     @Override
     public boolean existsWithTheSameNameAndAddress(Condominium condominium) {
-        return storage.stream().anyMatch(c -> c.getName().equalsIgnoreCase(condominium.getName()) && c.getAddress().equals(condominium.getAddress()) && !c.getId().equals(condominium.getId()));
+        return storage.stream()
+                      .anyMatch(c -> c.getName().equalsIgnoreCase(condominium.getName()) &&
+                                     c.getAddress().equals(condominium.getAddress()) &&
+                                     !c.getId().equals(condominium.getId()));
     }
 
     @Override

@@ -21,18 +21,21 @@ public class CondominiumService {
     private final ListCondominiumsUseCase listCondominiumsUseCase;
     private final GetCondominiumUseCase getCondominiumUseCase;
 
-    public CondominiumService(CreateCondominiumUseCase create, UpdateCondominiumUseCase update, ListCondominiumsUseCase list, GetCondominiumUseCase get) {
+    public CondominiumService(CreateCondominiumUseCase create, UpdateCondominiumUseCase update,
+                              ListCondominiumsUseCase list, GetCondominiumUseCase get) {
         this.createCondominiumUseCase = create;
         this.updateCondominiumUseCase = update;
         this.listCondominiumsUseCase = list;
         this.getCondominiumUseCase = get;
     }
 
-    public Condominium create(String name, String street, String city, String state, String zipcode, String country) throws InvalidFieldException, ConflictException {
+    public Condominium create(String name, String street, String city, String state, String zipcode,
+                              String country) throws InvalidFieldException, ConflictException {
         return createCondominiumUseCase.execute(name, street, city, state, zipcode, country);
     }
 
-    public Condominium update(UUID id, String name, String street, String city, String state, String zipcode, String country) throws InvalidFieldException, ConflictException, NotFoundException {
+    public Condominium update(UUID id, String name, String street, String city, String state, String zipcode,
+                              String country) throws InvalidFieldException, ConflictException, NotFoundException {
         return updateCondominiumUseCase.execute(id, name, street, city, state, zipcode, country);
     }
 

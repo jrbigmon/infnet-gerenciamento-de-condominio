@@ -15,25 +15,29 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(ConflictException.class)
     public ResponseEntity<BaseExceptionMessage> handleConflictException(ConflictException exception) {
-        BaseExceptionMessage body = new BaseExceptionMessage(exception.getMessage(), HttpStatus.CONFLICT.value(), LocalDateTime.now());
+        BaseExceptionMessage body = new BaseExceptionMessage(
+                exception.getMessage(), HttpStatus.CONFLICT.value(), LocalDateTime.now());
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(InvalidFieldException.class)
     public ResponseEntity<BaseExceptionMessage> handleInvalidFieldException(InvalidFieldException exception) {
-        BaseExceptionMessage body = new BaseExceptionMessage(exception.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
+        BaseExceptionMessage body = new BaseExceptionMessage(
+                exception.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<BaseExceptionMessage> handleNotFoundException(NotFoundException exception) {
-        BaseExceptionMessage body = new BaseExceptionMessage(exception.getMessage(), HttpStatus.NOT_FOUND.value(), LocalDateTime.now());
+        BaseExceptionMessage body = new BaseExceptionMessage(
+                exception.getMessage(), HttpStatus.NOT_FOUND.value(), LocalDateTime.now());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<BaseExceptionMessage> handleGeneralException(Exception ex) {
-        BaseExceptionMessage body = new BaseExceptionMessage("Something went wrong. Go back later", HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
+        BaseExceptionMessage body = new BaseExceptionMessage(
+                "Something went wrong. Go back later", HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

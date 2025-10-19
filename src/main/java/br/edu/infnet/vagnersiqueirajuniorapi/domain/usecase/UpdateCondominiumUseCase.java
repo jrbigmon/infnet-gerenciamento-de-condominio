@@ -10,7 +10,8 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.ICondominiumRepos
 import java.util.UUID;
 
 public record UpdateCondominiumUseCase(ICondominiumRepository condominiumRepository) {
-    public Condominium execute(UUID id, String name, String street, String city, String state, String zipcode, String country) throws InvalidFieldException, ConflictException, NotFoundException {
+    public Condominium execute(UUID id, String name, String street, String city, String state, String zipcode,
+                               String country) throws InvalidFieldException, ConflictException, NotFoundException {
         Condominium condominium = condominiumRepository.findById(id);
 
         if (condominium == null) {
