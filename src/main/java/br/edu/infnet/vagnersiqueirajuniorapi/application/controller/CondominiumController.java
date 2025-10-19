@@ -32,4 +32,9 @@ public class CondominiumController {
     public List<Condominium> list() {
         return condominiumService.list();
     }
+
+    @GetMapping("/condominiums/{id}")
+    public Condominium get(@PathVariable UUID id)  {
+        return condominiumService.get(id);
+    }
 }

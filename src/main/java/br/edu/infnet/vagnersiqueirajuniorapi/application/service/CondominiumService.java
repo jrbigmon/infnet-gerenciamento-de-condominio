@@ -5,6 +5,7 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.ConflictException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.NotFoundException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.CreateCondominiumUseCase;
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.GetCondominiumUseCase;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.ListCondominiumsUseCase;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.UpdateCondominiumUseCase;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,13 @@ public class CondominiumService {
     private final CreateCondominiumUseCase createCondominiumUseCase;
     private final UpdateCondominiumUseCase updateCondominiumUseCase;
     private final ListCondominiumsUseCase listCondominiumsUseCase;
+    private final GetCondominiumUseCase getCondominiumUseCase;
 
-    public CondominiumService(CreateCondominiumUseCase createCondominiumUseCase, UpdateCondominiumUseCase updateCondominiumUseCase,  ListCondominiumsUseCase listCondominiumsUseCase) {
-        this.createCondominiumUseCase = createCondominiumUseCase;
-        this.updateCondominiumUseCase = updateCondominiumUseCase;
-        this.listCondominiumsUseCase = listCondominiumsUseCase;
+    public CondominiumService(CreateCondominiumUseCase create, UpdateCondominiumUseCase update, ListCondominiumsUseCase list, GetCondominiumUseCase get) {
+        this.createCondominiumUseCase = create;
+        this.updateCondominiumUseCase = update;
+        this.listCondominiumsUseCase = list;
+        this.getCondominiumUseCase = get;
     }
 
     public Condominium create(String name, String street, String city, String state, String zipcode, String country) throws InvalidFieldException, ConflictException {
@@ -35,5 +38,9 @@ public class CondominiumService {
 
     public List<Condominium> list() {
         return listCondominiumsUseCase.execute();
+    }
+
+    public Condominium get(UUID id) throws NotFoundException {
+        return getCondominiumUseCase.execute(id);
     }
 }
