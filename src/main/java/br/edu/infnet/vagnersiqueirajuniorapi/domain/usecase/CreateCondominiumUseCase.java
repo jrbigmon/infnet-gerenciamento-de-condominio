@@ -6,12 +6,7 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldExcept
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.objectvalue.Address;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.ICondominiumRepository;
 
-public class CreateCondominiumUseCase {
-    private final ICondominiumRepository condominiumRepository;
-
-    public CreateCondominiumUseCase(ICondominiumRepository condominiumRepository) {
-        this.condominiumRepository = condominiumRepository;
-    }
+public record CreateCondominiumUseCase(ICondominiumRepository condominiumRepository) {
 
     public Condominium execute(String name, String street, String city, String state, String zipcode, String country) throws InvalidFieldException, ConflictException {
         Condominium condominium = Condominium.create(name, new Address(street, city, state, zipcode, country));
