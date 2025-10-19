@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class CondominiumRepositoryImpl implements ICondominiumRepository {
@@ -19,6 +20,11 @@ public class CondominiumRepositoryImpl implements ICondominiumRepository {
 
     @Override
     public boolean existsWithTheSameNameAndAddress(Condominium condominium) {
-        return storage.stream().anyMatch(c -> c.getName().equalsIgnoreCase(condominium.getName()) && c.getAddress().equals(condominium.getAddress()));
+        return storage.stream().anyMatch(c -> c.getName().equalsIgnoreCase(condominium.getName()) && c.getAddress().equals(condominium.getAddress()) && !c.getId().equals(condominium.getId()));
+    }
+
+    @Override
+    public Condominium findById(UUID id) {
+        return storage.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(null);
     }
 }
