@@ -6,6 +6,7 @@ import br.edu.infnet.vagnersiqueirajuniorapi.application.service.CondominiumServ
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Condominium;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -25,5 +26,10 @@ public class CondominiumController {
     @PutMapping("/condominiums/{id}")
      public Condominium update(@PathVariable UUID id, @RequestBody UpdateCondominiumDto input)  {
         return condominiumService.update(id, input.name(), input.street(), input.city(), input.state(), input.zipcode(), input.country());
+    }
+
+    @GetMapping("/condominiums")
+    public List<Condominium> list() {
+        return condominiumService.list();
     }
 }

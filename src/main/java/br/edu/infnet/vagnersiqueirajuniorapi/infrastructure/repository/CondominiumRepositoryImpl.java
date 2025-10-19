@@ -27,4 +27,9 @@ public class CondominiumRepositoryImpl implements ICondominiumRepository {
     public Condominium findById(UUID id) {
         return storage.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(null);
     }
+
+    @Override
+    public List<Condominium> findAll() {
+        return storage;
+    }
 }
