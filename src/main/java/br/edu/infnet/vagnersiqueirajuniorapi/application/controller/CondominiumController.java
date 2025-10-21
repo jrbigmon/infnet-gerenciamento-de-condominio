@@ -39,4 +39,9 @@ public class CondominiumController {
     public Condominium get(@PathVariable UUID id) {
         return condominiumService.get(id);
     }
+
+    @PostMapping("/condominiums/{id}/generate-residences")
+    public void generateResidences(@PathVariable UUID id) {
+        condominiumService.generateResidences(id);
+    }
 }
