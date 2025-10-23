@@ -1,10 +1,8 @@
 package br.edu.infnet.vagnersiqueirajuniorapi.infrastructure.configuration;
 
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.IBlockRepository;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.ICondominiumRepository;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.CreateCondominiumUseCase;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.GetCondominiumUseCase;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.ListCondominiumsUseCase;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.UpdateCondominiumUseCase;
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,5 +27,10 @@ public class UseCaseInjector {
     @Bean
     public GetCondominiumUseCase getCondominiumUseCase(ICondominiumRepository condominiumRepository) {
         return new GetCondominiumUseCase(condominiumRepository);
+    }
+
+    @Bean
+    public CreateBlockUseCase  createBlockUseCase(ICondominiumRepository condominiumRepository, IBlockRepository blockRepository) {
+        return new CreateBlockUseCase(condominiumRepository, blockRepository);
     }
 }

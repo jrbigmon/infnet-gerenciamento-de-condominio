@@ -11,11 +11,20 @@ import java.util.UUID;
 public class Block {
     private UUID id;
     private String identifier;
+    private Integer floors;
     private Condominium condominium;
 
     public void isValid() throws InvalidFieldException {
         if (this.identifier.isEmpty()) {
             throw new InvalidFieldException("Block Identifier is required");
+        }
+
+        if (this.floors == null) {
+            throw new InvalidFieldException("Block Floors is required");
+        }
+
+        if (this.floors <= 0) {
+            throw new InvalidFieldException("Block Floors must be a positive integer");
         }
     }
 
