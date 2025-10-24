@@ -7,11 +7,21 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldExcept
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.NotFoundException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.IBlockRepository;
 
-public record CreateBlockUseCase(IBlockRepository blockRepository) {
-    public Block execute(Condominium condominium, String identifier, Integer floors) throws NotFoundException,
-                                                                                            ConflictException,
-                                                                                            InvalidFieldException {
-        Block block = condominium.createBlock(identifier, floors);
+import java.util.UUID;
+
+public record UpdateBlockUseCase(IBlockRepository blockRepository) {
+    public Block execute(Condominium condominium, UUID blockId, String identifier, Integer floors) throws
+                                                                                                   NotFoundException,
+                                                                                                   InvalidFieldException,
+                                                                                                   ConflictException {
+
+        Block block = blockRepository.findByIdAndCondominiumId(blockId, condominium);
+
+        if (block == null) {
+            throw new NotFoundException("Block not found");
+        }
+
+        block.update(identifier, floors);
 
         condominium.addBlock(block, this::checkDuplicate);
 

@@ -30,7 +30,20 @@ public class UseCaseInjector {
     }
 
     @Bean
-    public CreateBlockUseCase  createBlockUseCase(ICondominiumRepository condominiumRepository, IBlockRepository blockRepository) {
-        return new CreateBlockUseCase(condominiumRepository, blockRepository);
+    public CreateBlockUseCase  createBlockUseCase(IBlockRepository blockRepository) {
+        return new CreateBlockUseCase(blockRepository);
+    }
+
+    @Bean
+    public UpdateBlockUseCase updateBlockUseCase(IBlockRepository blockRepository) {
+        return new UpdateBlockUseCase(blockRepository);
+    }
+
+    @Bean ListBlockUseCase  listBlockUseCase(IBlockRepository blockRepository) {
+        return new ListBlockUseCase(blockRepository);
+    }
+
+    @Bean GetBlockUseCase getBlockUseCase(IBlockRepository blockRepository) {
+        return new GetBlockUseCase(blockRepository);
     }
 }
