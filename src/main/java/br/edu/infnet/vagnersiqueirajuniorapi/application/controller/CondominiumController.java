@@ -44,9 +44,4 @@ public class CondominiumController {
     public void delete(@PathVariable UUID id) {
         condominiumService.delete(id);
     }
-
-//    @PostMapping("/condominiums/{id}/generate-residences")
-//    public void generateResidences(@PathVariable UUID id) {
-//        condominiumService.generateResidences(id);
-//    }
 }
