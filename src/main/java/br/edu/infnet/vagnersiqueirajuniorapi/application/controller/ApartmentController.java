@@ -21,7 +21,6 @@ public class ApartmentController {
         this.apartmentService = apartmentService;
     }
 
-
     @PostMapping("condominiums/{id}/blocks/{blockId}/apartments/generate")
     public List<GenerateApartmentResponseDto> create(@PathVariable UUID id, @PathVariable UUID blockId,
                                                      @RequestBody CreateApartmentsDto input) {
