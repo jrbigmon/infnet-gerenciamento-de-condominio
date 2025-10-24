@@ -54,4 +54,9 @@ public class UseCaseInjector {
     @Bean DeleteBlockUseCase deleteBlockUseCase(IBlockRepository blockRepository) {
         return new DeleteBlockUseCase(blockRepository);
     }
+
+    @Bean
+    GenerateApartmentsUseCase createApartmentsUseCase() {
+        return new GenerateApartmentsUseCase();
+    }
 }

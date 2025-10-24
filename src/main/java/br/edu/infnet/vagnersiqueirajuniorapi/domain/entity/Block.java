@@ -28,19 +28,28 @@ public class Block {
         }
     }
 
-    public Apartment createApartment(String identifier) throws InvalidFieldException {
+    public Apartment createApartment(String identifier, Integer floor) throws InvalidFieldException {
         Apartment apartment = new Apartment();
         apartment.setId(UUID.randomUUID());
         apartment.setIdentifier(identifier);
+        apartment.setFloor(floor);
         apartment.isValid();
         return apartment;
     }
 
     public void addApartment(Apartment apartment, CheckApartment checker) throws ConflictException {
-        boolean isDuplicate = checker.checkDuplicate(apartment);
+        boolean isDuplicate = checker.checkDuplicate(apartment, this);
 
         if (isDuplicate) {
             throw new ConflictException("Duplicate Apartment");
+        }
+
+        if (apartment.getFloor() <= 0) {
+            throw new ConflictException("Floors must be a positive integer");
+        }
+
+        if (apartment.getFloor() > this.floors) {
+            throw new ConflictException("Floor is greater than block's floors");
         }
 
         apartment.setBlock(this);

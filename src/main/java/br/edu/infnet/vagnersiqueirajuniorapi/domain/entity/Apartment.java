@@ -14,11 +14,16 @@ import java.util.UUID;
 public class Apartment {
     private UUID id;
     private String identifier;
+    private Integer floor;
     private Block block;
 
     public void isValid() throws InvalidFieldException {
         if (this.identifier.isEmpty()) {
             throw new InvalidFieldException("Apartment identifier is required");
+        }
+
+        if (this.floor == null) {
+            throw new InvalidFieldException("Apartment floor is required");
         }
     }
 
