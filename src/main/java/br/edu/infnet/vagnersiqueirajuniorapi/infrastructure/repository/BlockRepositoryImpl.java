@@ -39,4 +39,17 @@ public class BlockRepositoryImpl implements IBlockRepository {
     public List<Block> findAllByCondominium(Condominium condominium) {
         return storage.stream().filter(b -> b.getCondominium().getId().equals(condominium.getId())).toList();
     }
+
+    @Override
+    public void deleteAllByCondominium(Condominium condominium) {
+        List<Block> blocks = findAllByCondominium(condominium);
+        for (Block block : blocks) {
+            storage.remove(block);
+        }
+    }
+
+    @Override
+    public void delete(Block block) {
+        storage.remove(block);
+    }
 }

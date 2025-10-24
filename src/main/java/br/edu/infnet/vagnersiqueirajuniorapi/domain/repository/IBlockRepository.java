@@ -11,4 +11,6 @@ public interface IBlockRepository {
     boolean existsWithinCondominiumWithSameIdentifier(Block block, Condominium condominium);
     Block findByIdAndCondominiumId(UUID id, Condominium condominium);
     List<Block> findAllByCondominium(Condominium condominium);
+    void deleteAllByCondominium(Condominium condominium);
+    void delete(Block block);
 }

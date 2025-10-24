@@ -10,4 +10,5 @@ public interface ICondominiumRepository {
     boolean existsWithTheSameNameAndAddress(Condominium condominium);
     Condominium findById(UUID id);
     List<Condominium> findAll();
+    void delete(Condominium condominium);
 }

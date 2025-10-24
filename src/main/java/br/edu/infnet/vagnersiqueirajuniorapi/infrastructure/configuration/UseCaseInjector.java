@@ -46,4 +46,12 @@ public class UseCaseInjector {
     @Bean GetBlockUseCase getBlockUseCase(IBlockRepository blockRepository) {
         return new GetBlockUseCase(blockRepository);
     }
+
+    @Bean DeleteCondominiumUseCase deleteCondominiumUseCase(ICondominiumRepository condominiumRepository, IBlockRepository blockRepository) {
+        return new DeleteCondominiumUseCase(condominiumRepository, blockRepository);
+    }
+
+    @Bean DeleteBlockUseCase deleteBlockUseCase(IBlockRepository blockRepository) {
+        return new DeleteBlockUseCase(blockRepository);
+    }
 }

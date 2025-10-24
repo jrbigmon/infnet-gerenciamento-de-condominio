@@ -18,14 +18,16 @@ public class BlockService {
     private final UpdateBlockUseCase updateBlockUseCase;
     private final ListBlockUseCase listBlockUseCase;
     private final GetBlockUseCase getBlockUseCase;
+    private final DeleteBlockUseCase deleteBlockUseCase;
 
     public BlockService(CreateBlockUseCase createBlockUseCase, UpdateBlockUseCase updateBlockUseCase,
-                        ListBlockUseCase listBlockUseCase, GetCondominiumUseCase getCondominiumUseCase, GetBlockUseCase getBlockUseCase) {
+                        ListBlockUseCase listBlockUseCase, GetCondominiumUseCase getCondominiumUseCase, GetBlockUseCase getBlockUseCase,  DeleteBlockUseCase deleteBlockUseCase) {
         this.createBlockUseCase = createBlockUseCase;
         this.updateBlockUseCase = updateBlockUseCase;
         this.listBlockUseCase = listBlockUseCase;
         this.getCondominiumUseCase = getCondominiumUseCase;
         this.getBlockUseCase = getBlockUseCase;
+        this.deleteBlockUseCase = deleteBlockUseCase;
     }
 
     public Block create(UUID condominiumId, String identifier, Integer floors) throws NotFoundException,
@@ -39,7 +41,8 @@ public class BlockService {
                                                                                                     InvalidFieldException,
                                                                                                     ConflictException {
         Condominium condominium = getCondominiumUseCase.execute(condominiumId);
-        return updateBlockUseCase.execute(condominium, blockId, identifier, floors);
+        Block  block = getBlockUseCase.execute(condominium, blockId);
+        return updateBlockUseCase.execute(condominium, block, identifier, floors);
     }
 
     public List<Block> list(UUID condominiumId) throws NotFoundException {
@@ -52,4 +55,9 @@ public class BlockService {
         return getBlockUseCase.execute(condominium, blockId);
     }
 
+    public void delete(UUID condominiumId, UUID blockId) throws NotFoundException {
+        Condominium condominium = getCondominiumUseCase.execute(condominiumId);
+        Block block = getBlockUseCase.execute(condominium, blockId);
+        deleteBlockUseCase.execute(block);
+    }
 }

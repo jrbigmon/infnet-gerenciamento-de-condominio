@@ -37,4 +37,9 @@ public class BlockController {
     public List<Block> findAll(@PathVariable UUID id) {
         return blockService.list(id);
     }
+
+    @DeleteMapping("/condominiums/{id}/blocks/{blockId}")
+    public void delete(@PathVariable UUID id, @PathVariable UUID blockId) {
+        blockService.delete(id, blockId);
+    }
 }

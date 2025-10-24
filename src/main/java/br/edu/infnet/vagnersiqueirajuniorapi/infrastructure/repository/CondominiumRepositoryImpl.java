@@ -35,4 +35,9 @@ public class CondominiumRepositoryImpl implements ICondominiumRepository {
     public List<Condominium> findAll() {
         return storage;
     }
+
+    @Override
+    public void delete(Condominium condominium) {
+        storage.remove(condominium);
+    }
 }
