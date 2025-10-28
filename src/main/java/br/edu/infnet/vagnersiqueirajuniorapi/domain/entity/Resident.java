@@ -18,34 +18,34 @@ public class Resident {
     private Apartment apartment;
 
     public void isValid() throws InvalidFieldException {
+        InvalidFieldException exception = new InvalidFieldException("resident invalid fields");
+
         if (name.isEmpty()) {
-            throw new InvalidFieldException("Name is required");
+            exception.putError("name", "is required");
         }
 
         if (cpf == null) {
-            throw new InvalidFieldException("CPF is required");
-        }
-
-        if (!cpf.isValid()) {
-            throw new InvalidFieldException("CPF is not valid");
+            exception.putError("cpf", "is required");
+        } else if (!cpf.isValid()) {
+            exception.putError("cpf", "is not valid");
         }
 
         if (rg == null) {
-            throw new InvalidFieldException("RG is required");
-        }
-
-        if (!rg.isValid()) {
-            throw new InvalidFieldException("RG is not valid");
+            exception.putError("rg", "is required");
+        } else if (!rg.isValid()) {
+            exception.putError("rg", "is not valid");
         }
 
         if (birthDate == null) {
-            throw new InvalidFieldException("Birth date is required");
+            exception.putError("birthDate", "is required");
+        } else if (birthDate.isAfter(LocalDateTime.now())) {
+            {
+                exception.putError("birthDate", "must be before now");
+            }
         }
 
-        if (birthDate.isAfter(LocalDateTime.now())) {
-            {
-                throw new InvalidFieldException("Birth date is after now");
-            }
+        if (exception.isNotEmpty()) {
+            throw exception;
         }
     }
 }

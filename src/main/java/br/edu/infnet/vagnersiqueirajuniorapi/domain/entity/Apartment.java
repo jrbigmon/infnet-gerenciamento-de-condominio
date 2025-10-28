@@ -14,11 +14,22 @@ import java.util.UUID;
 public class Apartment {
     private UUID id;
     private String identifier;
+    private Integer floor;
     private Block block;
 
     public void isValid() throws InvalidFieldException {
+        InvalidFieldException exception = new InvalidFieldException("apartment invalid fields");
+
         if (this.identifier.isEmpty()) {
-            throw new InvalidFieldException("Apartment identifier is required");
+            exception.putError("identifier", "is required");
+        }
+
+        if (this.floor == null) {
+            exception.putError("floor", "is required");
+        }
+
+        if (exception.isNotEmpty()) {
+            throw exception;
         }
     }
 
@@ -38,11 +49,11 @@ public class Apartment {
         boolean livingInAnotherApartment = checker.livingInAnotherApartment(resident);
 
         if (isDuplicated) {
-            throw new ConflictException("Duplicated resident");
+            throw new ConflictException("duplicated resident");
         }
 
         if (livingInAnotherApartment) {
-            throw new ConflictException("Living In Another Apartment");
+            throw new ConflictException("living In Another Apartment");
         }
 
         resident.setApartment(this);
