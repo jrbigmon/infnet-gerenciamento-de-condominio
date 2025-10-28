@@ -25,16 +25,20 @@ public class Condominium {
     }
 
     public void isValid() throws InvalidFieldException {
+        InvalidFieldException exception = new InvalidFieldException("condominium invalid fields");
+
         if (this.name.isEmpty()) {
-            throw new InvalidFieldException("Name is required");
+            exception.putError("name", "is required");
         }
 
         if (this.address == null) {
-            throw new InvalidFieldException("Address is required");
+            exception.putError("address", "is required");
+        } else if (!this.address.isValid()) {
+            exception.putError("address", "is not valid");
         }
 
-        if (!this.address.isValid()) {
-            throw new InvalidFieldException("Address is not valid");
+        if (exception.isNotEmpty()) {
+            throw exception;
         }
     }
 
@@ -51,7 +55,7 @@ public class Condominium {
         boolean isDuplicate = checker.checkDuplicate(block, this);
 
         if (isDuplicate) {
-            throw new ConflictException("Duplicate Block");
+            throw new ConflictException("duplicate Block");
         }
 
         block.setCondominium(this);

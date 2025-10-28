@@ -15,16 +15,20 @@ public class Block {
     private Condominium condominium;
 
     public void isValid() throws InvalidFieldException {
+        InvalidFieldException exception = new InvalidFieldException("block invalid fields");
+
         if (this.identifier.isEmpty()) {
-            throw new InvalidFieldException("Block Identifier is required");
+            exception.putError("identifier", "is required");
         }
 
         if (this.floors == null) {
-            throw new InvalidFieldException("Block Floors is required");
+            exception.putError("floors", "is required");
+        } else if (this.floors <= 0) {
+            exception.putError("floors", "must be a positive integer");
         }
 
-        if (this.floors <= 0) {
-            throw new InvalidFieldException("Block Floors must be a positive integer");
+        if (exception.isNotEmpty()) {
+            throw exception;
         }
     }
 
@@ -41,15 +45,15 @@ public class Block {
         boolean isDuplicate = checker.checkDuplicate(apartment, this);
 
         if (isDuplicate) {
-            throw new ConflictException("Duplicate Apartment");
+            throw new ConflictException("duplicate Apartment");
         }
 
         if (apartment.getFloor() <= 0) {
-            throw new ConflictException("Floors must be a positive integer");
+            throw new ConflictException("floors must be a positive integer");
         }
 
         if (apartment.getFloor() > this.floors) {
-            throw new ConflictException("Floor is greater than block's floors");
+            throw new ConflictException("floor is greater than block's floors");
         }
 
         apartment.setBlock(this);

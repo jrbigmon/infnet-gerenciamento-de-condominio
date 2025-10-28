@@ -2,6 +2,7 @@ package br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase;
 
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Apartment;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Block;
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
 import br.edu.infnet.vagnersiqueirajuniorapi.utils.Alphabetic;
 
 import java.util.ArrayList;
@@ -9,6 +10,12 @@ import java.util.List;
 
 public record GenerateApartmentsUseCase() {
     public List<Apartment> execute(Block block, Integer floorStart, Integer floorEnd, Integer apartmentQuantity) {
+        InvalidFieldException exception = validate(floorStart, floorEnd, apartmentQuantity);
+
+        if (exception.isNotEmpty()) {
+            throw exception;
+        }
+
         List<Apartment> apartments = new ArrayList<>();
 
         for (int floor = floorStart; floor <= floorEnd; floor++) {
@@ -19,6 +26,26 @@ public record GenerateApartmentsUseCase() {
         }
 
         return apartments;
+    }
+
+    private InvalidFieldException validate(Integer floorStart, Integer floorEnd, Integer apartmentQuantity) {
+        InvalidFieldException exception = new InvalidFieldException("Generate apartments invalid fields");
+
+        if (floorEnd < floorStart) {
+            exception.putError("floorEnd", "floorEnd must be greater than floorStart");
+        }
+
+        int MAX_FLOORS_PER_BLOCK = 100;
+        if (floorEnd > MAX_FLOORS_PER_BLOCK) {
+            exception.putError("floorEnd", "Max floor per block is " + MAX_FLOORS_PER_BLOCK);
+        }
+
+        int MAX_APARTMENT_PER_FLOOR = 40;
+        if (apartmentQuantity > MAX_APARTMENT_PER_FLOOR) {
+            exception.putError("apartmentQuantity", "Max apartments per floor is " + MAX_APARTMENT_PER_FLOOR);
+        }
+
+        return exception;
     }
 
     private String generateApartmentNumber(Integer floor, Integer apartmentNumber) {
