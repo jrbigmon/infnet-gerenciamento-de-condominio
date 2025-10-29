@@ -62,4 +62,10 @@ public class Apartment {
 
         resident.setApartment(this);
     }
+
+    public void update(String identifier, Integer floor) throws InvalidFieldException {
+        this.identifier = identifier;
+        this.floor = floor;
+        this.isValid();
+    }
 }

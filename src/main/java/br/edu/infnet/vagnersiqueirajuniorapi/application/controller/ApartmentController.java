@@ -1,9 +1,6 @@
 package br.edu.infnet.vagnersiqueirajuniorapi.application.controller;
 
-import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.ApartmentResponseDto;
-import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.CreateApartmentDto;
-import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.GenerateApartmentResponseDto;
-import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.GenerateApartmentsDto;
+import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.*;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.mapper.ApartmentMapper;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.service.ApartmentService;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.types.CreateApartmentType;
@@ -31,9 +28,7 @@ public class ApartmentController {
 
         return ApartmentMapper.apartmentToGenerateResponse(
                 apartmentService.generate(
-                        id, blockId, input.floorStart(), input.floorEnd(),
-                        input.apartmentQuantity()
-                ));
+                        id, blockId, input.floorStart(), input.floorEnd(), input.apartmentQuantity()));
     }
 
     @PostMapping("condominiums/{id}/blocks/{blockId}/apartments/list")
@@ -48,5 +43,17 @@ public class ApartmentController {
     @GetMapping("condominiums/{id}/blocks/{blockId}/apartments")
     public List<ApartmentResponseDto> list(@PathVariable UUID id, @PathVariable UUID blockId) {
         return ApartmentMapper.apartmentToResponse(apartmentService.list(id, blockId));
+    }
+
+    @PutMapping("condominiums/{id}/blocks/{blockId}/apartments/{apartmentId}")
+    public ApartmentResponseDto update(@PathVariable UUID id, @PathVariable UUID blockId,
+                                       @PathVariable UUID apartmentId, @RequestBody UpdateApartmentDto input) {
+        return ApartmentMapper.apartmentToResponse(
+                apartmentService.update(id, blockId, apartmentId, input.identifier(), input.floor()));
+    }
+
+    @GetMapping("condominiums/{id}/blocks/{blockId}/apartments/{apartmentId}")
+    public ApartmentResponseDto get(@PathVariable UUID id, @PathVariable UUID blockId, @PathVariable UUID apartmentId) {
+        return ApartmentMapper.apartmentToResponse(apartmentService.get(id, blockId, apartmentId));
     }
 }

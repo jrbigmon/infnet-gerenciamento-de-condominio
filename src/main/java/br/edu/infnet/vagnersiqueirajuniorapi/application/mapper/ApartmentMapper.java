@@ -16,4 +16,8 @@ public class ApartmentMapper {
                          .map(a -> new ApartmentResponseDto(a.getId(), a.getIdentifier(), a.getFloor()))
                          .toList();
     }
+
+    public static ApartmentResponseDto apartmentToResponse(Apartment apartment) {
+        return new ApartmentResponseDto(apartment.getId(), apartment.getIdentifier(), apartment.getFloor());
+    }
 }

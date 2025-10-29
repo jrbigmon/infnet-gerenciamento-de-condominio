@@ -20,15 +20,20 @@ public class ApartmentService {
     private final GetCondominiumUseCase getCondominiumUseCase;
     private final CreateApartmentUseCase createApartmentUseCase;
     private final ListApartmentUseCase listApartmentUseCase;
+    private final UpdateApartmentUseCase updateApartmentUseCase;
+    private final GetApartmentUseCase getApartmentUseCase;
 
     public ApartmentService(GenerateApartmentsUseCase generate, GetBlockUseCase getBlockUseCase,
                             GetCondominiumUseCase getCondominiumUseCase, CreateApartmentUseCase createApartmentUseCase,
-                            ListApartmentUseCase list) {
+                            ListApartmentUseCase list, UpdateApartmentUseCase updateApartmentUseCase,
+                            GetApartmentUseCase getApartmentUseCase) {
         this.generateApartmentsUseCase = generate;
         this.getBlockUseCase = getBlockUseCase;
         this.getCondominiumUseCase = getCondominiumUseCase;
         this.createApartmentUseCase = createApartmentUseCase;
         this.listApartmentUseCase = list;
+        this.updateApartmentUseCase = updateApartmentUseCase;
+        this.getApartmentUseCase = getApartmentUseCase;
     }
 
     public List<Apartment> generate(UUID condominiumId, UUID blockId, Integer floorStart, Integer floorEnd,
@@ -50,5 +55,20 @@ public class ApartmentService {
         Condominium condominium = getCondominiumUseCase.execute(condominiumId);
         Block block = getBlockUseCase.execute(condominium, blockId);
         return listApartmentUseCase.execute(block);
+    }
+
+    public Apartment update(UUID condominiumId, UUID blockId, UUID apartmentId, String identifier, Integer floor) throws
+                                                                                                                  NotFoundException,
+                                                                                                                  InvalidFieldException {
+        Condominium condominium = getCondominiumUseCase.execute(condominiumId);
+        Block block = getBlockUseCase.execute(condominium, blockId);
+        Apartment apartment = getApartmentUseCase.execute(block, apartmentId);
+        return updateApartmentUseCase.execute(block, apartment, identifier, floor);
+    }
+
+    public Apartment get(UUID condominiumId, UUID blockId, UUID apartmentId) throws NotFoundException {
+        Condominium condominium = getCondominiumUseCase.execute(condominiumId);
+        Block block = getBlockUseCase.execute(condominium, blockId);
+        return getApartmentUseCase.execute(block, apartmentId);
     }
 }

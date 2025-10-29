@@ -52,13 +52,14 @@ public class UseCaseInjector {
 
     @Bean
     DeleteCondominiumUseCase deleteCondominiumUseCase(ICondominiumRepository condominiumRepository,
-                                                      IBlockRepository blockRepository) {
-        return new DeleteCondominiumUseCase(condominiumRepository, blockRepository);
+                                                      IBlockRepository blockRepository,
+                                                      IApartmentRepository apartmentRepository) {
+        return new DeleteCondominiumUseCase(condominiumRepository, blockRepository, apartmentRepository);
     }
 
     @Bean
-    DeleteBlockUseCase deleteBlockUseCase(IBlockRepository blockRepository) {
-        return new DeleteBlockUseCase(blockRepository);
+    DeleteBlockUseCase deleteBlockUseCase(IBlockRepository blockRepository, IApartmentRepository apartmentRepository) {
+        return new DeleteBlockUseCase(blockRepository, apartmentRepository);
     }
 
     @Bean
@@ -74,5 +75,15 @@ public class UseCaseInjector {
     @Bean
     ListApartmentUseCase listApartmentUseCase(IApartmentRepository apartmentRepository) {
         return new ListApartmentUseCase(apartmentRepository);
+    }
+
+    @Bean
+    UpdateApartmentUseCase updateApartmentUseCase(IApartmentRepository apartmentRepository) {
+        return new UpdateApartmentUseCase(apartmentRepository);
+    }
+
+    @Bean
+    GetApartmentUseCase getApartmentUseCase(IApartmentRepository apartmentRepository) {
+        return new GetApartmentUseCase(apartmentRepository);
     }
 }
