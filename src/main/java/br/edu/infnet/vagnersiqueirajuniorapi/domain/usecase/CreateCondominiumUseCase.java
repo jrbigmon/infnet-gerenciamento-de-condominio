@@ -9,8 +9,8 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.ICondominiumRepos
 public record CreateCondominiumUseCase(ICondominiumRepository condominiumRepository) {
 
     public Condominium execute(String name, String street, String city, String state, String zipcode,
-                               String country) throws InvalidFieldException, ConflictException {
-        Condominium condominium = Condominium.create(name, new Address(street, city, state, zipcode, country));
+                               String country, String number) throws InvalidFieldException, ConflictException {
+        Condominium condominium = Condominium.create(name, new Address(street, city, state, zipcode, country, number));
 
         boolean exists = condominiumRepository.existsWithTheSameNameAndAddress(condominium);
 

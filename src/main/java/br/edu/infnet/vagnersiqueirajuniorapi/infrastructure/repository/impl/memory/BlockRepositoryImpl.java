@@ -1,8 +1,9 @@
-package br.edu.infnet.vagnersiqueirajuniorapi.infrastructure.repository;
+package br.edu.infnet.vagnersiqueirajuniorapi.infrastructure.repository.impl.memory;
 
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Block;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Condominium;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.IBlockRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Profile("dev")
 public class BlockRepositoryImpl implements IBlockRepository {
 
     private final List<Block> storage = new ArrayList<>();

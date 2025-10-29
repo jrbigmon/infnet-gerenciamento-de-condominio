@@ -3,6 +3,10 @@ package br.edu.infnet.vagnersiqueirajuniorapi.domain.entity;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.ConflictException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.service.CheckApartment;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.util.UUID;
@@ -11,10 +15,15 @@ import static br.edu.infnet.vagnersiqueirajuniorapi.domain.constant.BlockConstan
 import static br.edu.infnet.vagnersiqueirajuniorapi.domain.constant.BlockConstants.MIN_FLOORS;
 
 @Data
+@Entity
 public class Block {
+    @Id
     private UUID id;
     private String identifier;
     private Integer floors;
+
+    @ManyToOne
+    @JoinColumn(name = "condominium_id")
     private Condominium condominium;
 
     public void isValid() throws InvalidFieldException {

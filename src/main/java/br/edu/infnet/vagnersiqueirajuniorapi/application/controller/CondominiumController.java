@@ -21,13 +21,17 @@ public class CondominiumController {
     @PostMapping("/condominiums")
     public Condominium create(@RequestBody CreateCondominiumDto input) {
         return condominiumService.create(
-                input.name(), input.street(), input.city(), input.state(), input.zipcode(), input.country());
+                input.name(), input.street(), input.city(), input.state(), input.zipcode(),
+                input.country(), input.number()
+        );
     }
 
     @PutMapping("/condominiums/{id}")
     public Condominium update(@PathVariable UUID id, @RequestBody UpdateCondominiumDto input) {
         return condominiumService.update(
-                id, input.name(), input.street(), input.city(), input.state(), input.zipcode(), input.country());
+                id, input.name(), input.street(), input.city(), input.state(), input.zipcode(), input.country(),
+                input.number()
+        );
     }
 
     @GetMapping("/condominiums")

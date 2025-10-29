@@ -1,9 +1,10 @@
-package br.edu.infnet.vagnersiqueirajuniorapi.infrastructure.repository;
+package br.edu.infnet.vagnersiqueirajuniorapi.infrastructure.repository.impl.memory;
 
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Apartment;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Block;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Condominium;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.IApartmentRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Profile("dev")
 public class ApartmentRepositoryImpl implements IApartmentRepository {
     private final List<Apartment> storage = new ArrayList<>();
 

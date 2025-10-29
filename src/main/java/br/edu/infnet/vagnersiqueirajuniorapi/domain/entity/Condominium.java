@@ -4,15 +4,23 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.ConflictException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.objectvalue.Address;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.service.CheckBlock;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.util.UUID;
 
 
 @Data
+@Entity
 public class Condominium {
+
+    @Id
     private UUID id;
     private String name;
+
+    @Embedded
     private Address address;
 
     public static Condominium create(String name, Address address) throws InvalidFieldException {
