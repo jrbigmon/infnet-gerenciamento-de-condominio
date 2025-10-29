@@ -1,18 +1,15 @@
 package br.edu.infnet.vagnersiqueirajuniorapi.application.controller;
 
+import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.ApartmentResponseDto;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.CreateApartmentDto;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.GenerateApartmentResponseDto;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.dto.GenerateApartmentsDto;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.mapper.ApartmentMapper;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.service.ApartmentService;
 import br.edu.infnet.vagnersiqueirajuniorapi.application.types.CreateApartmentType;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Apartment;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,9 +28,12 @@ public class ApartmentController {
     @PostMapping("condominiums/{id}/blocks/{blockId}/apartments/generate")
     public List<GenerateApartmentResponseDto> generate(@PathVariable UUID id, @PathVariable UUID blockId,
                                                        @RequestBody @Valid GenerateApartmentsDto input) {
-        List<Apartment> apartments = apartmentService.generate(
-                id, blockId, input.floorStart(), input.floorEnd(), input.apartmentQuantity());
-        return ApartmentMapper.map(apartments);
+
+        return ApartmentMapper.apartmentToGenerateResponse(
+                apartmentService.generate(
+                        id, blockId, input.floorStart(), input.floorEnd(),
+                        input.apartmentQuantity()
+                ));
     }
 
     @PostMapping("condominiums/{id}/blocks/{blockId}/apartments/list")
@@ -43,5 +43,10 @@ public class ApartmentController {
                 id, blockId,
                 input.stream().map(a -> new CreateApartmentType(a.identifier(), a.floor())).toList()
         );
+    }
+
+    @GetMapping("condominiums/{id}/blocks/{blockId}/apartments")
+    public List<ApartmentResponseDto> list(@PathVariable UUID id, @PathVariable UUID blockId) {
+        return ApartmentMapper.apartmentToResponse(apartmentService.list(id, blockId));
     }
 }

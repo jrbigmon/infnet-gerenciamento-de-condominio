@@ -50,7 +50,7 @@ public class Block {
         boolean isDuplicate = checker.checkDuplicate(apartment, this);
 
         if (isDuplicate) {
-            throw new ConflictException("duplicate Apartment");
+            throw new ConflictException("duplicate Apartment " + apartment.getIdentifier());
         }
 
         if (apartment.getFloor() > this.floors) {

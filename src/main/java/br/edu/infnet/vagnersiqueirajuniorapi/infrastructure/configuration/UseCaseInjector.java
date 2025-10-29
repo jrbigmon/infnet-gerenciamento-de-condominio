@@ -70,4 +70,9 @@ public class UseCaseInjector {
     CreateApartmentUseCase createApartmentUseCase(IApartmentRepository apartmentRepository) {
         return new CreateApartmentUseCase(apartmentRepository);
     }
+
+    @Bean
+    ListApartmentUseCase listApartmentUseCase(IApartmentRepository apartmentRepository) {
+        return new ListApartmentUseCase(apartmentRepository);
+    }
 }

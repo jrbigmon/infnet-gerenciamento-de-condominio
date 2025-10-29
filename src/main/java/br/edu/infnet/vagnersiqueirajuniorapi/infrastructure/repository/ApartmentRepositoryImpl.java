@@ -24,4 +24,9 @@ public class ApartmentRepositoryImpl implements IApartmentRepository {
                                      !a.getId().equals(apartment.getId()) &&
                                      a.getBlock().getId().equals(block.getId()));
     }
+
+    @Override
+    public List<Apartment> findAllByBlock(Block block) {
+        return storage.stream().filter(a -> a.getBlock().getId().equals(block.getId())).toList();
+    }
 }

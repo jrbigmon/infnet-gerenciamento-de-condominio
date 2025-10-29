@@ -6,10 +6,8 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Block;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.entity.Condominium;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.ConflictException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.CreateApartmentUseCase;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.GenerateApartmentsUseCase;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.GetBlockUseCase;
-import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.GetCondominiumUseCase;
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.NotFoundException;
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,14 +19,16 @@ public class ApartmentService {
     private final GetBlockUseCase getBlockUseCase;
     private final GetCondominiumUseCase getCondominiumUseCase;
     private final CreateApartmentUseCase createApartmentUseCase;
+    private final ListApartmentUseCase listApartmentUseCase;
 
     public ApartmentService(GenerateApartmentsUseCase generate, GetBlockUseCase getBlockUseCase,
-                            GetCondominiumUseCase getCondominiumUseCase,
-                            CreateApartmentUseCase createApartmentUseCase) {
+                            GetCondominiumUseCase getCondominiumUseCase, CreateApartmentUseCase createApartmentUseCase,
+                            ListApartmentUseCase list) {
         this.generateApartmentsUseCase = generate;
         this.getBlockUseCase = getBlockUseCase;
         this.getCondominiumUseCase = getCondominiumUseCase;
         this.createApartmentUseCase = createApartmentUseCase;
+        this.listApartmentUseCase = list;
     }
 
     public List<Apartment> generate(UUID condominiumId, UUID blockId, Integer floorStart, Integer floorEnd,
@@ -44,5 +44,11 @@ public class ApartmentService {
         Condominium condominium = getCondominiumUseCase.execute(condominiumId);
         Block block = getBlockUseCase.execute(condominium, blockId);
         apartments.forEach(a -> createApartmentUseCase.execute(block, a.identifier(), a.floor()));
+    }
+
+    public List<Apartment> list(UUID condominiumId, UUID blockId) throws NotFoundException {
+        Condominium condominium = getCondominiumUseCase.execute(condominiumId);
+        Block block = getBlockUseCase.execute(condominium, blockId);
+        return listApartmentUseCase.execute(block);
     }
 }

@@ -55,7 +55,7 @@ public class Condominium {
         boolean isDuplicate = checker.checkDuplicate(block, this);
 
         if (isDuplicate) {
-            throw new ConflictException("duplicate Block");
+            throw new ConflictException("duplicate Block " + block.getIdentifier());
         }
 
         block.setCondominium(this);
