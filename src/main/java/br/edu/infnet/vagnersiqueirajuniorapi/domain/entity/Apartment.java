@@ -28,6 +28,10 @@ public class Apartment {
             exception.putError("floor", "is required");
         }
 
+        if (this.floor < 0) {
+            exception.putError("floor", "must be greater than or equal to 0");
+        }
+
         if (exception.isNotEmpty()) {
             throw exception;
         }

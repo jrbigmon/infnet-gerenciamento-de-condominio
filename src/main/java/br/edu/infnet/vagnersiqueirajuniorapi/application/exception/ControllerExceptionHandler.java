@@ -3,17 +3,21 @@ package br.edu.infnet.vagnersiqueirajuniorapi.application.exception;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.ConflictException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.NotFoundException;
+import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
@@ -28,7 +32,7 @@ public class ControllerExceptionHandler {
     public ResponseEntity<BaseExceptionMessage> handleInvalidFieldException(InvalidFieldException exception) {
         BaseExceptionMessage body = new BaseExceptionMessage(
                 exception.getMessage(), exception.getErrors(),
-                                                             HttpStatus.BAD_REQUEST.value(), LocalDateTime.now()
+                HttpStatus.BAD_REQUEST.value(), LocalDateTime.now()
         );
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
@@ -42,10 +46,12 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<BaseExceptionMessage> handleGeneralException(Exception ex) {
+        log.error("e: ", ex);
+
         BaseExceptionMessage body = new BaseExceptionMessage(
                 "Something went wrong. Go back later", null,
-                                                             HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                                                             LocalDateTime.now()
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                LocalDateTime.now()
         );
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -54,13 +60,33 @@ public class ControllerExceptionHandler {
     public ResponseEntity<BaseExceptionMessage> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-
         ex.getBindingResult().getFieldErrors().forEach(e -> errors.put(e.getField(), e.getDefaultMessage()));
-
         BaseExceptionMessage body = new BaseExceptionMessage(
                 "invalid fields", errors, HttpStatus.BAD_REQUEST.value(),
-                                                             LocalDateTime.now()
+                LocalDateTime.now()
         );
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<BaseExceptionMessage> handleConstraintViolationException(ConstraintViolationException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getConstraintViolations().forEach(v -> errors.put(v.getPropertyPath().toString(), v.getMessage()));
+        BaseExceptionMessage body = new BaseExceptionMessage(
+                "invalid fields", errors, HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<BaseExceptionMessage> handleHandlerMethodValidationException(
+            HandlerMethodValidationException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getAllErrors().forEach(e -> errors.put("data", e.getDefaultMessage()));
+        BaseExceptionMessage body = new BaseExceptionMessage(
+                "invalid fields", errors, HttpStatus.BAD_REQUEST.value(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
 }

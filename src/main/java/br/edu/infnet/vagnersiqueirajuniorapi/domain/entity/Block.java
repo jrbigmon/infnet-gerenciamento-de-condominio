@@ -7,6 +7,9 @@ import lombok.Data;
 
 import java.util.UUID;
 
+import static br.edu.infnet.vagnersiqueirajuniorapi.domain.constant.BlockConstants.MAX_FLOORS;
+import static br.edu.infnet.vagnersiqueirajuniorapi.domain.constant.BlockConstants.MIN_FLOORS;
+
 @Data
 public class Block {
     private UUID id;
@@ -23,8 +26,10 @@ public class Block {
 
         if (this.floors == null) {
             exception.putError("floors", "is required");
-        } else if (this.floors <= 0) {
-            exception.putError("floors", "must be a positive integer");
+        } else if (this.floors <= MIN_FLOORS) {
+            exception.putError("floors", "must be greater than or equal to " + MIN_FLOORS);
+        } else if (this.floors > MAX_FLOORS) {
+            exception.putError("floors", "must be less than " + MAX_FLOORS);
         }
 
         if (exception.isNotEmpty()) {
@@ -46,10 +51,6 @@ public class Block {
 
         if (isDuplicate) {
             throw new ConflictException("duplicate Apartment");
-        }
-
-        if (apartment.getFloor() <= 0) {
-            throw new ConflictException("floors must be a positive integer");
         }
 
         if (apartment.getFloor() > this.floors) {

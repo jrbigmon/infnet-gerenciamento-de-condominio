@@ -20,7 +20,8 @@ public class CondominiumService {
     private final DeleteCondominiumUseCase deleteCondominiumUseCase;
 
     public CondominiumService(CreateCondominiumUseCase create, UpdateCondominiumUseCase update,
-                              ListCondominiumsUseCase list, GetCondominiumUseCase get, DeleteCondominiumUseCase delete) {
+                              ListCondominiumsUseCase list, GetCondominiumUseCase get,
+                              DeleteCondominiumUseCase delete) {
         this.createCondominiumUseCase = create;
         this.updateCondominiumUseCase = update;
         this.listCondominiumsUseCase = list;

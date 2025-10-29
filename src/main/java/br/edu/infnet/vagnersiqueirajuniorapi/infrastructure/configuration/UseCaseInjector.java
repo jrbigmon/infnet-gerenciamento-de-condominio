@@ -1,5 +1,6 @@
 package br.edu.infnet.vagnersiqueirajuniorapi.infrastructure.configuration;
 
+import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.IApartmentRepository;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.IBlockRepository;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.repository.ICondominiumRepository;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.*;
@@ -30,7 +31,7 @@ public class UseCaseInjector {
     }
 
     @Bean
-    public CreateBlockUseCase  createBlockUseCase(IBlockRepository blockRepository) {
+    public CreateBlockUseCase createBlockUseCase(IBlockRepository blockRepository) {
         return new CreateBlockUseCase(blockRepository);
     }
 
@@ -39,24 +40,34 @@ public class UseCaseInjector {
         return new UpdateBlockUseCase(blockRepository);
     }
 
-    @Bean ListBlockUseCase  listBlockUseCase(IBlockRepository blockRepository) {
+    @Bean
+    ListBlockUseCase listBlockUseCase(IBlockRepository blockRepository) {
         return new ListBlockUseCase(blockRepository);
     }
 
-    @Bean GetBlockUseCase getBlockUseCase(IBlockRepository blockRepository) {
+    @Bean
+    GetBlockUseCase getBlockUseCase(IBlockRepository blockRepository) {
         return new GetBlockUseCase(blockRepository);
     }
 
-    @Bean DeleteCondominiumUseCase deleteCondominiumUseCase(ICondominiumRepository condominiumRepository, IBlockRepository blockRepository) {
+    @Bean
+    DeleteCondominiumUseCase deleteCondominiumUseCase(ICondominiumRepository condominiumRepository,
+                                                      IBlockRepository blockRepository) {
         return new DeleteCondominiumUseCase(condominiumRepository, blockRepository);
     }
 
-    @Bean DeleteBlockUseCase deleteBlockUseCase(IBlockRepository blockRepository) {
+    @Bean
+    DeleteBlockUseCase deleteBlockUseCase(IBlockRepository blockRepository) {
         return new DeleteBlockUseCase(blockRepository);
     }
 
     @Bean
     GenerateApartmentsUseCase createApartmentsUseCase() {
         return new GenerateApartmentsUseCase();
+    }
+
+    @Bean
+    CreateApartmentUseCase createApartmentUseCase(IApartmentRepository apartmentRepository) {
+        return new CreateApartmentUseCase(apartmentRepository);
     }
 }
