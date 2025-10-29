@@ -9,9 +9,16 @@ import java.util.UUID;
 
 public interface IApartmentRepository {
     void save(Apartment apartment);
+
     boolean existsWithinBlockWithSameIdentifier(Apartment apartment, Block block);
+
     List<Apartment> findAllByBlock(Block block);
+
     void deleteAllByCondominium(Condominium condominium);
+
     void deleteAllByBlock(Block block);
+
     Apartment findByIdAndBlockId(UUID id, Block block);
+
+    void delete(Apartment apartment);
 }

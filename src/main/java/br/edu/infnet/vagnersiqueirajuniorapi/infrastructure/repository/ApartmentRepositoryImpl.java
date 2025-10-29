@@ -55,5 +55,8 @@ public class ApartmentRepositoryImpl implements IApartmentRepository {
 
     }
 
-
+    @Override
+    public void delete(Apartment apartment) {
+        storage.remove(apartment);
+    }
 }

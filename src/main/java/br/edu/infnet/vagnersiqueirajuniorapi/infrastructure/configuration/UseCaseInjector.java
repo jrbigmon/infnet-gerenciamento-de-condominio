@@ -86,4 +86,9 @@ public class UseCaseInjector {
     GetApartmentUseCase getApartmentUseCase(IApartmentRepository apartmentRepository) {
         return new GetApartmentUseCase(apartmentRepository);
     }
+
+    @Bean
+    DeleteApartmentUseCase deleteApartmentUseCase(IApartmentRepository apartmentRepository) {
+        return new DeleteApartmentUseCase(apartmentRepository);
+    }
 }

@@ -28,7 +28,9 @@ public class ApartmentController {
 
         return ApartmentMapper.apartmentToGenerateResponse(
                 apartmentService.generate(
-                        id, blockId, input.floorStart(), input.floorEnd(), input.apartmentQuantity()));
+                        id, blockId, input.floorStart(), input.floorEnd(),
+                        input.apartmentQuantity()
+                ));
     }
 
     @PostMapping("condominiums/{id}/blocks/{blockId}/apartments/list")
@@ -55,5 +57,10 @@ public class ApartmentController {
     @GetMapping("condominiums/{id}/blocks/{blockId}/apartments/{apartmentId}")
     public ApartmentResponseDto get(@PathVariable UUID id, @PathVariable UUID blockId, @PathVariable UUID apartmentId) {
         return ApartmentMapper.apartmentToResponse(apartmentService.get(id, blockId, apartmentId));
+    }
+
+    @DeleteMapping("condominiums/{id}/blocks/{blockId}/apartments/{apartmentId}")
+    public void delete(@PathVariable UUID id, @PathVariable UUID blockId, @PathVariable UUID apartmentId) {
+        apartmentService.delete(id, blockId, apartmentId);
     }
 }

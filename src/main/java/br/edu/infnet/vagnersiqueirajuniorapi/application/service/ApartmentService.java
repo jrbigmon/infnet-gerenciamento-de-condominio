@@ -22,18 +22,20 @@ public class ApartmentService {
     private final ListApartmentUseCase listApartmentUseCase;
     private final UpdateApartmentUseCase updateApartmentUseCase;
     private final GetApartmentUseCase getApartmentUseCase;
+    private final DeleteApartmentUseCase deleteApartmentUseCase;
 
-    public ApartmentService(GenerateApartmentsUseCase generate, GetBlockUseCase getBlockUseCase,
+    public ApartmentService(GenerateApartmentsUseCase generateApartmentsUseCase, GetBlockUseCase getBlockUseCase,
                             GetCondominiumUseCase getCondominiumUseCase, CreateApartmentUseCase createApartmentUseCase,
-                            ListApartmentUseCase list, UpdateApartmentUseCase updateApartmentUseCase,
-                            GetApartmentUseCase getApartmentUseCase) {
-        this.generateApartmentsUseCase = generate;
+                            ListApartmentUseCase listApartmentUseCase, UpdateApartmentUseCase updateApartmentUseCase,
+                            GetApartmentUseCase getApartmentUseCase, DeleteApartmentUseCase deleteApartmentUseCase) {
+        this.generateApartmentsUseCase = generateApartmentsUseCase;
         this.getBlockUseCase = getBlockUseCase;
         this.getCondominiumUseCase = getCondominiumUseCase;
         this.createApartmentUseCase = createApartmentUseCase;
-        this.listApartmentUseCase = list;
+        this.listApartmentUseCase = listApartmentUseCase;
         this.updateApartmentUseCase = updateApartmentUseCase;
         this.getApartmentUseCase = getApartmentUseCase;
+        this.deleteApartmentUseCase = deleteApartmentUseCase;
     }
 
     public List<Apartment> generate(UUID condominiumId, UUID blockId, Integer floorStart, Integer floorEnd,
@@ -70,5 +72,12 @@ public class ApartmentService {
         Condominium condominium = getCondominiumUseCase.execute(condominiumId);
         Block block = getBlockUseCase.execute(condominium, blockId);
         return getApartmentUseCase.execute(block, apartmentId);
+    }
+
+    public void delete(UUID condominiumId, UUID blockId, UUID apartmentId) throws NotFoundException {
+        Condominium condominium = getCondominiumUseCase.execute(condominiumId);
+        Block block = getBlockUseCase.execute(condominium, blockId);
+        Apartment apartment = getApartmentUseCase.execute(block, apartmentId);
+        deleteApartmentUseCase.execute(apartment);
     }
 }

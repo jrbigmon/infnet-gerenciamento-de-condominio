@@ -19,14 +19,16 @@ public class CondominiumService {
     private final GetCondominiumUseCase getCondominiumUseCase;
     private final DeleteCondominiumUseCase deleteCondominiumUseCase;
 
-    public CondominiumService(CreateCondominiumUseCase create, UpdateCondominiumUseCase update,
-                              ListCondominiumsUseCase list, GetCondominiumUseCase get,
-                              DeleteCondominiumUseCase delete) {
-        this.createCondominiumUseCase = create;
-        this.updateCondominiumUseCase = update;
-        this.listCondominiumsUseCase = list;
-        this.getCondominiumUseCase = get;
-        this.deleteCondominiumUseCase = delete;
+    public CondominiumService(CreateCondominiumUseCase createCondominiumUseCase,
+                              UpdateCondominiumUseCase updateCondominiumUseCase,
+                              ListCondominiumsUseCase listCondominiumsUseCase,
+                              GetCondominiumUseCase getCondominiumUseCase,
+                              DeleteCondominiumUseCase deleteCondominiumUseCase) {
+        this.createCondominiumUseCase = createCondominiumUseCase;
+        this.updateCondominiumUseCase = updateCondominiumUseCase;
+        this.listCondominiumsUseCase = listCondominiumsUseCase;
+        this.getCondominiumUseCase = getCondominiumUseCase;
+        this.deleteCondominiumUseCase = deleteCondominiumUseCase;
     }
 
     public Condominium create(String name, String street, String city, String state, String zipcode,
