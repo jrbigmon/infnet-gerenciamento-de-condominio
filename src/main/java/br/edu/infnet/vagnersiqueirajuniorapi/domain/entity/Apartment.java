@@ -5,16 +5,26 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldExcept
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.objectvalue.CPF;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.objectvalue.RG;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.service.CheckResident;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
+@Entity
 public class Apartment {
+
+    @Id
     private UUID id;
     private String identifier;
     private Integer floor;
+
+    @ManyToOne
+    @JoinColumn(name = "block_id")
     private Block block;
 
     public void isValid() throws InvalidFieldException {
@@ -26,6 +36,10 @@ public class Apartment {
 
         if (this.floor == null) {
             exception.putError("floor", "is required");
+        }
+
+        if (this.floor < 0) {
+            exception.putError("floor", "must be greater than or equal to 0");
         }
 
         if (exception.isNotEmpty()) {
@@ -57,5 +71,11 @@ public class Apartment {
         }
 
         resident.setApartment(this);
+    }
+
+    public void update(String identifier, Integer floor) throws InvalidFieldException {
+        this.identifier = identifier;
+        this.floor = floor;
+        this.isValid();
     }
 }

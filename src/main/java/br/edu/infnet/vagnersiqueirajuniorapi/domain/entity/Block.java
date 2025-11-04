@@ -3,15 +3,27 @@ package br.edu.infnet.vagnersiqueirajuniorapi.domain.entity;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.ConflictException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.service.CheckApartment;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.util.UUID;
 
+import static br.edu.infnet.vagnersiqueirajuniorapi.domain.constant.BlockConstants.MAX_FLOORS;
+import static br.edu.infnet.vagnersiqueirajuniorapi.domain.constant.BlockConstants.MIN_FLOORS;
+
 @Data
+@Entity
 public class Block {
+    @Id
     private UUID id;
     private String identifier;
     private Integer floors;
+
+    @ManyToOne
+    @JoinColumn(name = "condominium_id")
     private Condominium condominium;
 
     public void isValid() throws InvalidFieldException {
@@ -23,8 +35,10 @@ public class Block {
 
         if (this.floors == null) {
             exception.putError("floors", "is required");
-        } else if (this.floors <= 0) {
-            exception.putError("floors", "must be a positive integer");
+        } else if (this.floors <= MIN_FLOORS) {
+            exception.putError("floors", "must be greater than or equal to " + MIN_FLOORS);
+        } else if (this.floors > MAX_FLOORS) {
+            exception.putError("floors", "must be less than " + MAX_FLOORS);
         }
 
         if (exception.isNotEmpty()) {
@@ -45,11 +59,7 @@ public class Block {
         boolean isDuplicate = checker.checkDuplicate(apartment, this);
 
         if (isDuplicate) {
-            throw new ConflictException("duplicate Apartment");
-        }
-
-        if (apartment.getFloor() <= 0) {
-            throw new ConflictException("floors must be a positive integer");
+            throw new ConflictException("duplicate Apartment " + apartment.getIdentifier());
         }
 
         if (apartment.getFloor() > this.floors) {

@@ -21,7 +21,8 @@ public class BlockService {
     private final DeleteBlockUseCase deleteBlockUseCase;
 
     public BlockService(CreateBlockUseCase createBlockUseCase, UpdateBlockUseCase updateBlockUseCase,
-                        ListBlockUseCase listBlockUseCase, GetCondominiumUseCase getCondominiumUseCase, GetBlockUseCase getBlockUseCase,  DeleteBlockUseCase deleteBlockUseCase) {
+                        ListBlockUseCase listBlockUseCase, GetCondominiumUseCase getCondominiumUseCase,
+                        GetBlockUseCase getBlockUseCase, DeleteBlockUseCase deleteBlockUseCase) {
         this.createBlockUseCase = createBlockUseCase;
         this.updateBlockUseCase = updateBlockUseCase;
         this.listBlockUseCase = listBlockUseCase;
@@ -41,7 +42,7 @@ public class BlockService {
                                                                                                     InvalidFieldException,
                                                                                                     ConflictException {
         Condominium condominium = getCondominiumUseCase.execute(condominiumId);
-        Block  block = getBlockUseCase.execute(condominium, blockId);
+        Block block = getBlockUseCase.execute(condominium, blockId);
         return updateBlockUseCase.execute(condominium, block, identifier, floors);
     }
 

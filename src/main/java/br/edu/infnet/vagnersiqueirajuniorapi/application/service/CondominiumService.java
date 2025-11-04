@@ -5,6 +5,7 @@ import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.ConflictException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.InvalidFieldException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.exception.NotFoundException;
 import br.edu.infnet.vagnersiqueirajuniorapi.domain.usecase.*;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,23 +20,27 @@ public class CondominiumService {
     private final GetCondominiumUseCase getCondominiumUseCase;
     private final DeleteCondominiumUseCase deleteCondominiumUseCase;
 
-    public CondominiumService(CreateCondominiumUseCase create, UpdateCondominiumUseCase update,
-                              ListCondominiumsUseCase list, GetCondominiumUseCase get, DeleteCondominiumUseCase delete) {
-        this.createCondominiumUseCase = create;
-        this.updateCondominiumUseCase = update;
-        this.listCondominiumsUseCase = list;
-        this.getCondominiumUseCase = get;
-        this.deleteCondominiumUseCase = delete;
+    public CondominiumService(CreateCondominiumUseCase createCondominiumUseCase,
+                              UpdateCondominiumUseCase updateCondominiumUseCase,
+                              ListCondominiumsUseCase listCondominiumsUseCase,
+                              GetCondominiumUseCase getCondominiumUseCase,
+                              DeleteCondominiumUseCase deleteCondominiumUseCase) {
+        this.createCondominiumUseCase = createCondominiumUseCase;
+        this.updateCondominiumUseCase = updateCondominiumUseCase;
+        this.listCondominiumsUseCase = listCondominiumsUseCase;
+        this.getCondominiumUseCase = getCondominiumUseCase;
+        this.deleteCondominiumUseCase = deleteCondominiumUseCase;
     }
 
     public Condominium create(String name, String street, String city, String state, String zipcode,
-                              String country) throws InvalidFieldException, ConflictException {
-        return createCondominiumUseCase.execute(name, street, city, state, zipcode, country);
+                              String country, String number) throws InvalidFieldException, ConflictException {
+        return createCondominiumUseCase.execute(name, street, city, state, zipcode, country, number);
     }
 
     public Condominium update(UUID id, String name, String street, String city, String state, String zipcode,
-                              String country) throws InvalidFieldException, ConflictException, NotFoundException {
-        return updateCondominiumUseCase.execute(id, name, street, city, state, zipcode, country);
+                              String country, String number) throws InvalidFieldException, ConflictException,
+                                                                    NotFoundException {
+        return updateCondominiumUseCase.execute(id, name, street, city, state, zipcode, country, number);
     }
 
     public List<Condominium> list() {
@@ -46,6 +51,7 @@ public class CondominiumService {
         return getCondominiumUseCase.execute(id);
     }
 
+    @Transactional
     public void delete(UUID id) throws NotFoundException {
         Condominium condominium = getCondominiumUseCase.execute(id);
         deleteCondominiumUseCase.execute(condominium);

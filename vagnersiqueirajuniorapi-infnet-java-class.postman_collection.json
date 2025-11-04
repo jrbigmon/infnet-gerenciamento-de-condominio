@@ -1,0 +1,679 @@
+{
+	"info": {
+		"_postman_id": "cb1ca133-e7da-49ab-a702-768be7015a26",
+		"name": "vagnersiqueirajuniorapi-infnet-java-class",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19952173"
+	},
+	"item": [
+		{
+			"name": "Condominium",
+			"item": [
+				{
+					"name": "Apartments",
+					"item": [
+						{
+							"name": "generate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"floorStart\": 0,\r\n   \"floorEnd\": 2,\r\n   \"apartmentQuantity\": 10\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}/apartments/generate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}",
+										"apartments",
+										"generate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-list",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"identifier\": \"0001\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0002\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0003\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0004\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0005\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0006\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0007\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0008\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0009\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"000A\",\r\n        \"floor\": 0\r\n    },\r\n    {\r\n        \"identifier\": \"0101\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0102\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0103\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0104\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0105\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0106\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0107\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0108\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0109\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"010A\",\r\n        \"floor\": 1\r\n    },\r\n    {\r\n        \"identifier\": \"0201\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"0202\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"0203\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"0204\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"0205\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"0206\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"0207\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"0208\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"0209\",\r\n        \"floor\": 2\r\n    },\r\n    {\r\n        \"identifier\": \"020A\",\r\n        \"floor\": 2\r\n    }\r\n]"
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}/apartments/list",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}",
+										"apartments",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identifier\": \"0001\",\r\n    \"floor\": 1\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}/apartments/{{apartmentId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}",
+										"apartments",
+										"{{apartmentId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}/apartments/{{apartmentId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}",
+										"apartments",
+										"{{apartmentId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();\r",
+											"if (response.length > 0) {\r",
+											"    pm.environment.set(\"apartmentId\", response[0].id);\r",
+											"    console.log(\"ocorreu com sucesso\");\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}/apartments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}",
+										"apartments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}/apartments/{{apartmentId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}",
+										"apartments",
+										"{{apartmentId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Blocks",
+					"item": [
+						{
+							"name": "create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();\r",
+											"console.log(response);\r",
+											"if (response.id) {\r",
+											"    pm.environment.set(\"blockId\", response.id);\r",
+											"    console.log(\"ocorreu com sucesso\");\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"identifier\": \"C\",\r\n   \"floors\": 10\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"identifier\": \"C\",\r\n   \"floors\": 12\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"identifier\": \"C\",\r\n   \"floors\": 12\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"identifier\": \"C\",\r\n   \"floors\": 12\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"identifier\": \"C\",\r\n   \"floors\": 12\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8081/condominiums/{{condominiumId}}/blocks/{{blockId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"condominiums",
+										"{{condominiumId}}",
+										"blocks",
+										"{{blockId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"console.log(response);\r",
+									"if (response.id) {\r",
+									"    pm.environment.set(\"condominiumId\", response.id);\r",
+									"    console.log(\"ocorreu com sucesso\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Le vin\",\r\n    \"street\": \"estrada do beija flor\",\r\n    \"city\": \"mogi das cruzesss\",\r\n    \"state\": \"SP\",\r\n    \"zipcode\": \"0884050\",\r\n    \"country\": \"BR\",\r\n    \"number\": \"290\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/condominiums",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"condominiums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Le vin gardenn\",\r\n    \"street\": \"estrada do beija-flor\",\r\n    \"city\": \"mogi das cruzesss\",\r\n    \"state\": \"SP\",\r\n    \"zipcode\": \"0884050\",\r\n    \"country\": \"BR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/condominiums/b0dd858f-edf6-4369-9c4b-8f5dbb13ce1c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"condominiums",
+								"b0dd858f-edf6-4369-9c4b-8f5dbb13ce1c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Le vin gardenn\",\r\n    \"street\": \"estrada do beija-flor\",\r\n    \"city\": \"mogi das cruzesss\",\r\n    \"state\": \"SP\",\r\n    \"zipcode\": \"0884050\",\r\n    \"country\": \"BR\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8081/condominiums/{{condominiumId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"condominiums",
+								"{{condominiumId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Le vin gardenn\",\r\n    \"street\": \"estrada do beija-flor\",\r\n    \"city\": \"mogi das cruzesss\",\r\n    \"state\": \"SP\",\r\n    \"zipcode\": \"0884050\",\r\n    \"country\": \"BR\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8081/condominiums",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"condominiums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Le vin gardenn\",\r\n    \"street\": \"estrada do beija-flor\",\r\n    \"city\": \"mogi das cruzesss\",\r\n    \"state\": \"SP\",\r\n    \"zipcode\": \"0884050\",\r\n    \"country\": \"BR\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8081/condominiums/56cad19a-d657-43a2-bb2a-bf21abea5cf2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"condominiums",
+								"56cad19a-d657-43a2-bb2a-bf21abea5cf2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

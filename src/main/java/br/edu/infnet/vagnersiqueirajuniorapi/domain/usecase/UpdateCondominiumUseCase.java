@@ -11,7 +11,8 @@ import java.util.UUID;
 
 public record UpdateCondominiumUseCase(ICondominiumRepository condominiumRepository) {
     public Condominium execute(UUID id, String name, String street, String city, String state, String zipcode,
-                               String country) throws InvalidFieldException, ConflictException, NotFoundException {
+                               String country, String number) throws InvalidFieldException, ConflictException,
+                                                                     NotFoundException {
         Condominium condominium = condominiumRepository.findById(id);
 
         if (condominium == null) {
@@ -19,7 +20,7 @@ public record UpdateCondominiumUseCase(ICondominiumRepository condominiumReposit
         }
 
         condominium.setName(name);
-        condominium.setAddress(new Address(street, city, state, zipcode, country));
+        condominium.setAddress(new Address(street, city, state, zipcode, country, number));
         condominium.isValid();
 
         boolean exists = condominiumRepository.existsWithTheSameNameAndAddress(condominium);
