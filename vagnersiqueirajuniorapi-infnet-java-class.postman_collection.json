@@ -498,7 +498,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Le vin\",\r\n    \"street\": \"estrada do beija flor\",\r\n    \"city\": \"mogi das cruzesss\",\r\n    \"state\": \"SP\",\r\n    \"zipcode\": \"0884050\",\r\n    \"country\": \"BR\"\r\n}\r\n",
+							"raw": "{\r\n    \"name\": \"Le vin\",\r\n    \"street\": \"estrada do beija flor\",\r\n    \"city\": \"mogi das cruzesss\",\r\n    \"state\": \"SP\",\r\n    \"zipcode\": \"0884050\",\r\n    \"country\": \"BR\",\r\n    \"number\": \"290\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
